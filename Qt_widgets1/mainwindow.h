@@ -16,9 +16,12 @@ public:
     ~MainWindow();
 private Q_SLOTS:
     void on_pushButton_toggled(bool checked);
+    void on_pushButtonTog_toggled(bool checked);
+
 private:
      QStringList lst;
      int current_value_bar;
+     bool status;
 private:
     Ui::MainWindow *ui;
 };

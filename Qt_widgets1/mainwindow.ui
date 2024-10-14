@@ -42,6 +42,13 @@
      <widget class="QComboBox" name="comboBox"/>
     </item>
     <item>
+     <widget class="QPushButton" name="pushButtonTog">
+      <property name="text">
+       <string>ToggleButton</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="pushButton">
       <property name="text">
        <string>PushButton</string>

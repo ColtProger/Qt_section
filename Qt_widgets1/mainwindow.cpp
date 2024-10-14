@@ -7,6 +7,7 @@
 #include <QStringList>
 #include <QProgressBar>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -26,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui -> progressBar->setValue(current_value_bar);
 
     QObject::connect(ui -> pushButton, &QPushButton::clicked, this, &MainWindow::on_pushButton_toggled);
+
+    //ui->pushButtonTog->setDown(true);
+    QObject::connect(ui -> pushButtonTog, &QPushButton::clicked, this, &MainWindow::on_pushButtonTog_toggled);
 }
 
 MainWindow::~MainWindow()
@@ -46,3 +50,18 @@ void MainWindow::on_pushButton_toggled(bool checked)
      }
 }
 
+
+void MainWindow::on_pushButtonTog_toggled(bool checked)
+{
+    if(status ==true)
+    {
+        status = false;
+        qDebug()<<"setDown(false)";
+    }
+   else
+    {
+        status = true;
+        qDebug()<<"setDown(true)";
+    }
+    ui->pushButtonTog->setDown(status);
+}
