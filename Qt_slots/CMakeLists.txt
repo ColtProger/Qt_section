@@ -17,8 +17,10 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        Stopwatch.cpp
-        Stopwatch.h
+        #Stopwatch.cpp
+       # Stopwatch.h
+        Stopwatch2.cpp
+        Stopwatch2.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -1,27 +1,28 @@
-#include"Stopwatch.h"
-#include<QTimer>
-#include<QDebug>
+#include "stopwatch2.h"
 
-Stopwatch::Stopwatch(QObject *parent):QTimer{parent}
+Stopwatch2::Stopwatch2(QObject *parent):QTimer{parent}
 {
     ms = ms;
     s = s;
     min = min;
     hh = hh;
 
+
     timer = new QTimer();
-
+    connect(timer, &QTimer::timeout, this, &Stopwatch2::start_timer);
+    //connect(this, &Stopwatch2::sig_stop, timer, &QTimer::stop);
 }
-Stopwatch::~Stopwatch()
+
+Stopwatch2::~Stopwatch2()
 {
 
 }
 
-void Stopwatch::start_timer(int pause)
+void Stopwatch2::start_timer() //(int pause)
 {
-    //timer->start(pause);
-    //qDebug()<<"start_timer";
-     ms++;
+    emit sig_start_pause(pause);
+    timer->start(pause);
+    ms++;
      if (ms>=1000){
         ms = 0;
          s++;
@@ -37,7 +38,7 @@ void Stopwatch::start_timer(int pause)
 
 }
 
-void Stopwatch::reset_timer(){
+void Stopwatch2::reset_timer(){
     ms = 0;
     s = 0;
     min = 0;
@@ -45,18 +46,18 @@ void Stopwatch::reset_timer(){
     ms1 = 0;
 }
 
-void Stopwatch::stop_timer(){
-
-     timer->stop();
+void Stopwatch2::stop_timer(){
+    //emit sig_stop();
+    timer->stop();
 }
 
-QString  Stopwatch::get_time(){
+QString  Stopwatch2::get_time(){
     QString line = QString::number(hh) + ":" + QString::number(min) + ":" +QString::number(s)+"."+QString::number(ms);
     return line;
 
 }
 
-QString  Stopwatch::get_round_time(){
+QString  Stopwatch2::get_round_time(){
     ms2 =min*60000 + s*1000 + ms;
     round = ms2 - ms1;
     int sec = round/1000;
@@ -67,4 +68,3 @@ QString  Stopwatch::get_round_time(){
     return line;
 
 }
-

@@ -5,7 +5,7 @@
 #include<QTimer>
 #include<QTime>
 #include<QFont>
-#include "Stopwatch.h"
+#include "Stopwatch2.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,8 +19,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+public slots:
+    void ReceiveSignalP(int pause);
     void ReceiveSignal();
+
+private slots:
+
 
     void on_StartButton_clicked();
 
@@ -30,8 +34,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Stopwatch *timer_s;
+
+    Stopwatch2 *timer_s;
     int round_number = 0;
     bool flag = false;
+    int pause = 1;
 };
 #endif // MAINWINDOW_H

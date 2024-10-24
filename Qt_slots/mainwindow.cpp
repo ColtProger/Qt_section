@@ -13,10 +13,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->StartButton->setText("START");
     ui->ResetButton->setText("RESET");
 
-    ui->TimeLabel->setText(QString::number(0) + ":" + QString::number(0) + ":" +QString::number(0)+"."+QString::number(0) );
+    ui->TimeLabel->setText(QString::number(00) + ":" + QString::number(00) + ":" +QString::number(00)+"."+QString::number(000) );
 
-        timer_s = new Stopwatch(this);
-        QObject::connect(timer_s, &Stopwatch::timeout, this, &MainWindow::ReceiveSignal);
+        timer_s = new Stopwatch2(this);
+
+     //  QObject::connect(timer_s, &Stopwatch2::timeout, this, &MainWindow::ReceiveSignal);
+        connect(timer_s, &Stopwatch2::sig_start_pause, this, &MainWindow::ReceiveSignalP);
+       //int pause = 1;
 
 }
 
@@ -25,11 +28,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::ReceiveSignal()
 {
    //  timer_s->start(1);
-    timer_s->start_timer(1);
+   emit sig_start_pause();
+   timer_s->start_timer();
+
+   ui->TimeLabel->setText(timer_s->get_time());
+}
+
+
+
+void MainWindow::ReceiveSignalP(int pause)
+{
+   //  timer_s->start(1);
+   //timer_s->sig_start_pause(1);
+   timer_s->start_timer();
 
    ui->TimeLabel->setText(timer_s->get_time());
 }
@@ -43,7 +57,8 @@ void MainWindow::on_StartButton_clicked()
     }
     else {
        ui->StartButton->setText("STOP");
-       timer_s->start(1);
+       timer_s->sig_start_pause(1);
+       //timer_s->start(1);
     }
     flag = !flag;
 }
