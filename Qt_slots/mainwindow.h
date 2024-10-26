@@ -19,9 +19,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 public slots:
-    void ReceiveSignalP(int pause);
-    void ReceiveSignal();
+    void displayTime(int pause);
 
 private slots:
 
@@ -38,6 +38,6 @@ private:
     Stopwatch2 *timer_s;
     int round_number = 0;
     bool flag = false;
-    int pause = 1;
+    int pause = 0;
 };
 #endif // MAINWINDOW_H

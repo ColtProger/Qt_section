@@ -9,8 +9,7 @@ Stopwatch2::Stopwatch2(QObject *parent):QTimer{parent}
 
 
     timer = new QTimer();
-    connect(timer, &QTimer::timeout, this, &Stopwatch2::start_timer);
-    //connect(this, &Stopwatch2::sig_stop, timer, &QTimer::stop);
+    connect(timer, &QTimer::timeout, this, &Stopwatch2::timeoutLogic);
 }
 
 Stopwatch2::~Stopwatch2()
@@ -18,10 +17,15 @@ Stopwatch2::~Stopwatch2()
 
 }
 
-void Stopwatch2::start_timer() //(int pause)
+void Stopwatch2::start_timer(int pause) //(int pause)
 {
-    emit sig_start_pause(pause);
+    pause =pause;
     timer->start(pause);
+}
+
+
+void Stopwatch2::timeoutLogic() //(int pause)
+{
     ms++;
      if (ms>=1000){
         ms = 0;
@@ -35,7 +39,7 @@ void Stopwatch2::start_timer() //(int pause)
         min = 0;
         hh++;
      }
-
+     emit sig_start_pause(pause);
 }
 
 void Stopwatch2::reset_timer(){
@@ -47,7 +51,6 @@ void Stopwatch2::reset_timer(){
 }
 
 void Stopwatch2::stop_timer(){
-    //emit sig_stop();
     timer->stop();
 }
 

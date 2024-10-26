@@ -14,15 +14,14 @@ public:
     ~Stopwatch2();
 
 
-    void SendStartSignal();
     void stop_timer();
     QString get_time();
     void reset_timer();
     QString get_round_time();
-    //void start_timer(int pause);
+    void start_timer(int pause);
 
 public slots:
-    void start_timer();
+    void timeoutLogic();
 
 
 signals:
