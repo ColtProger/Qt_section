@@ -9,12 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->pb_clearResult->setCheckable(true);
 
-    //Graphform = new FormPlot();
-
-    // connect(ui->plotButton, SIGNAL(clicked()), Graphform, SLOT(show()));
-    //Выделим память под наши объекты.
-
-        //Объект QChart
+          //Объект QChart
         chart = new QChart( );
         chart->legend()->setVisible(false);
 
@@ -23,14 +18,10 @@ MainWindow::MainWindow(QWidget *parent)
         graphClass = new GraphicChart(NUM_GRAPHS);
 
 
-        layout = new QGridLayout;
-        ui->wid_Charts->setLayout(layout);
-        layout->addWidget(chartView);
-        chartView->show( );
-
         connect(this, &MainWindow::sig_ready, [this]{
             DisplayResult(mins, maxs);
         });
+
        connect(this, &MainWindow::sig_graph_ready,this, &MainWindow::plotGraph);
 
 }
